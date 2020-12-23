@@ -23,21 +23,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest().authenticated(); //요청에 대한 보안검사 시작 (인가정책)
-        http
-            .formLogin() //form login 방식의 인증
-            //.loginPage("/loginPage")
-            .defaultSuccessUrl("/")
-            .failureUrl("/login")
-            .usernameParameter("userId")
-            .passwordParameter("passwd")
-            .loginProcessingUrl("/login_proc")
-            .successHandler((request, response, authentication) -> {
-                System.out.println("authentication :"+authentication.getName());
-                response.sendRedirect("/");
-            }).failureHandler((request, response, exception) -> {
-                System.out.println("exception :"+ exception.getMessage());
-                response.sendRedirect("/login");
-            })
-                .permitAll(); //loginPage에 접근하는 클라이언트들은 인증받지않아도 가능
+        http.formLogin();
+//        http
+//            .formLogin() //form login 방식의 인증
+//            //.loginPage("/loginPage")
+//            .defaultSuccessUrl("/")
+//            .failureUrl("/login")
+//            .usernameParameter("userId")
+//            .passwordParameter("passwd")
+//            .loginProcessingUrl("/login_proc")
+//            .successHandler((request, response, authentication) -> {
+//                System.out.println("authentication :"+authentication.getName());
+//                response.sendRedirect("/");
+//            }).failureHandler((request, response, exception) -> {
+//                System.out.println("exception :"+ exception.getMessage());
+//                response.sendRedirect("/login");
+//            })
+//                .permitAll(); //loginPage에 접근하는 클라이언트들은 인증받지않아도 가능
     }
 }
