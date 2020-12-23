@@ -58,3 +58,26 @@ protected void configure(HttpSecurity http) throws Exception{
 #### UsernamePasswordAuthenticationFilter
 
 ![image](https://user-images.githubusercontent.com/40031858/102995608-c9d29780-4564-11eb-8e0f-9f190ebbe734.png)
+
+## 1-5) 인증 API- Logout,LogoutFilter
+
+#### 로그아웃 과정
+![image](https://user-images.githubusercontent.com/40031858/102997257-fb009700-4567-11eb-86d0-2c1e4d95a325.png)
+
+### http.logout(): 로그아웃 기능이 작동
+```
+protected void configure(HttpSecurity http) throws Exception{
+    http.logout()   //로그아웃 처리
+        .logoutUrl("/logout")   //로그아웃 처리 URL
+        .logoutSuccessUrl("/login") //로그아웃 성공후 이동페이지
+        .deleteCookies("JSESSIONID", "remember-me") //로그아웃 후 쿠키 삭제
+        .addLogoutHandler(logoutHandler())  //로그아웃 핸들러
+        .logoutSuccessHandler(logoutSuccessHandler())   // 로그아웃 성공 후 핸들러
+}
+```
+
+![image](https://user-images.githubusercontent.com/40031858/102997396-6185b500-4568-11eb-8fa0-261758c2bb3d.png)
+
+LogoutFilter
+
+![image](https://user-images.githubusercontent.com/40031858/102997435-7c582980-4568-11eb-929d-1b106c5c782a.png)
