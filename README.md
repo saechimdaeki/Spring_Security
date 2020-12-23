@@ -48,3 +48,13 @@ protected void configure(HttpSecurity http) throws Exception{
     .failureHandler(loginFailureHandler()) // 로긍니 실패 후 핸들러
 }
 ```
+
+## 1-4) 인증 API - UsernamePasswordAuthenticationFilter
+
+#### Login Form 인증
+
+![image](https://user-images.githubusercontent.com/40031858/102995477-77917680-4564-11eb-9e2f-9d071535b904.png)
+
+#### UsernamePasswordAuthenticationFilter
+
+![image](https://user-images.githubusercontent.com/40031858/102995608-c9d29780-4564-11eb-8e0f-9f190ebbe734.png)
