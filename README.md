@@ -82,7 +82,6 @@ LogoutFilter
 
 ![image](https://user-images.githubusercontent.com/40031858/102997435-7c582980-4568-11eb-929d-1b106c5c782a.png)
 
----
 
 ## 1-6) 인증 API- Remember Me 인증
 
@@ -104,3 +103,9 @@ protected void configure(HttpSecurity http) throws Exception{
         .userDetailsService(userDetailsService)
 }
 ```
+
+## 1-7) Remember Me 인증 필터 : RememberMeAuthenticationFilter
+
+![image](https://user-images.githubusercontent.com/40031858/103162882-c9265380-4839-11eb-8a90-414fee3d81b2.png)
+
+![image](https://user-images.githubusercontent.com/40031858/103162884-d6dbd900-4839-11eb-8e89-127d34ab3cea.png)
