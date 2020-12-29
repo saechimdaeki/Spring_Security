@@ -115,9 +115,60 @@ protected void configure(HttpSecurity http) throws Exception{
 ![image](https://user-images.githubusercontent.com/40031858/103163114-0e985000-483d-11eb-8cbc-20f98a8c22f3.png)
 
 ```
-인증을 하지 않은 사용자를 단지 user 객체가 null 이라는 단순한 개념이 아닌 AnonymouAuthenticationToken 객체에  익명사용자의 정보를 저장하고(사용자명, 권한, 인증여부 등..) 이를 SecuirtyContext 객체에 저장하여 어플리케이션 전역적으로 사용할 수있도록 도입했을 뿐
+인증을 하지 않은 사용자를 단지 user 객체가 null 이라는 단순한 개념이 아닌 
+AnonymouAuthenticationToken 객체에  익명사용자의 정보를 저장하고
+(사용자명, 권한, 인증여부 등..) 이를 SecuirtyContext 객체에 저장하여 어플리케이션 
+전역적으로 사용할 수있도록 도입했을 뿐
 
 즉, 익명사용자일 경우
-String user = SecurityContextHolder.getContext().getAuthentication() 하면 user 에 "anonymousUser" 가 저장되고 이 user 변수는 principal 에 저장이 되며 principal 은 AnonymousAuthenticationToken 저장이 되고 최종적으로 AnonymusAuthenticationToken 은 SecurityContext 에 저장이 되는 계층적 구조 
+String user = SecurityContextHolder.getContext().getAuthentication() 하면 
+user 에 "anonymousUser" 가 저장되고 이 user 변수는 principal 에 저장이 되며 
+principal 은 AnonymousAuthenticationToken 저장이 되고 최종적으로 
+AnonymusAuthenticationToken 은 SecurityContext 에 저장이 되는 계층적 구조 
 이러한 전반적인 처리를 하는 필터가 AnonymousAuthenticationFilter
+```
+
+## 1-9) 동시세션제어/세션 고정보호/ 세션정책
+
+### 동시 세션 제어
+
+![image](https://user-images.githubusercontent.com/40031858/103266956-06cedc00-49f4-11eb-92d2-7645592cde7c.png)
+
+### http.sessionManagement():세션 관리기능이 작동함
+
+```
+protected void configure(HttpSecurity http) throws Exception{
+    http.sessionManagement()
+        .maximumSessions(1) // 최대 허용 가능 세션 수, -1: 무제한 로그인 세션 허용
+        .maxSessionsPreventsLogin(true) // 동시 로그인 차단함, false: 기존 세션 만료(default)
+        .invalidSessionUrl("/invalid") //세션이 유효하지 않을 때 이동할 페이지
+        .expiredUrl("/expired") //세션이 만료된 경우 이동 할 페이지
+}
+```
+
+### 세션 고정 보호
+
+![image](https://user-images.githubusercontent.com/40031858/103269907-249f3f80-49fa-11eb-8be1-1e1fb765885a.png)
+
+#### http.sessionManagement(): 세션 관리 기능이 작동함
+```
+protected void configure(HttpSecurity http) throws Exception{
+    http.sessionManagement()
+        .sessionFixation().changeSessionId()//기본값
+        // none,migrateSession, newSession
+}
+```
+
+### 세션 정책
+
+```
+protected void configure(HttpSecurity http) throws Exception{
+    http.sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.If_Required)
+}
+
+SessionCreationPolicy.Always : 스프링 시큐리티가 항상세션생성
+SessionCreationPolicy.If_Required : 스프링 시큐리티가 필요시 생성(기본값)
+SessionCreationPolicy.Never : 스프링 시큐리티가 생성하지 않지만 이미 존재하면 사용
+SessionCreationPolicy.Stateless : 스프링 시큐리티가 생성하지 않고 존재해도 사용하지 않음
 ```
