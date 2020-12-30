@@ -172,3 +172,27 @@ SessionCreationPolicy.If_Required : 스프링 시큐리티가 필요시 생성(�
 SessionCreationPolicy.Never : 스프링 시큐리티가 생성하지 않지만 이미 존재하면 사용
 SessionCreationPolicy.Stateless : 스프링 시큐리티가 생성하지 않고 존재해도 사용하지 않음
 ```
+
+---
+
+## 1-10) SessionManagementFilter,ConcurrentSessionFilter
+### 인증 API- SessionManagementFilter
+1. 세션 관리
+    - 인증 시 사용자의 세션정보를 등록, 조회, 삭제 등의 세션 이력을 관리
+2. 동시적 세션 제어
+    - 동일 계정으로 접속이 허용되는 최대 세션수를 제한
+3. 세션고정보호
+    - 인증 할 때마다 세션 쿠키를 새로 발급하여 공격자의 쿠키 조작을 방지
+4. 세션 정책 생성
+    - Always,If_Required,Never,Stateless
+
+### 인증 API- ConcurrentSessionFilter
+- 매 요청 마다 현재 사용자의 세션 만료 여부 체크
+- 세션이 만료로 설정되었을 경우 즉시만료처리
+- session.isExpired()==true
+    - 로그아웃 처리
+    - 즉시 오류페이지 응답("this session has been expired")
+
+![image](https://user-images.githubusercontent.com/40031858/103327417-cb85e900-4a97-11eb-9788-c95283520496.png)
+
+![image](https://user-images.githubusercontent.com/40031858/103327425-d8a2d800-4a97-11eb-8693-737d05c6add5.png)
