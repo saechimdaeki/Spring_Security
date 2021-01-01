@@ -196,3 +196,34 @@ SessionCreationPolicy.Stateless : 스프링 시큐리티가 생성하지 않고 
 ![image](https://user-images.githubusercontent.com/40031858/103327417-cb85e900-4a97-11eb-9788-c95283520496.png)
 
 ![image](https://user-images.githubusercontent.com/40031858/103327425-d8a2d800-4a97-11eb-8693-737d05c6add5.png)
+
+---
+
+## 1-11) 권한 설정과 표현식
+### 인가 API- 권한 설정
+- 선언적 방식
+    - URL
+        - http.antMatchers("/users/**").hasRole("USER")
+    - Method
+        - @PreAuthorize("hasRole('USER')")
+            public void user(){println("user")}
+- 동적 방식- DB 연동 프로그래밍
+    - URL
+    - Method
+
+```
+@Override
+protected void configure(HttpSecurity http) throws Exception{
+    http
+        .antMatcher("/shop/**")
+        .authorizeRequests()
+            .antMatchers("/shop/login","shop/users/**").permitAll()
+            .antMatchers("/shop/mypage").hasRole("USER")
+            .antMatchers("/shop/admin/pay").access("hasRole('ADMIN')");
+            .antMatchers("/shop/admin/**").access("hasRole('ADMIN') or hasRole('SYS')");
+            .anyRequest().authenticated()
+}
+    주의사항- 설정시 구체적인 경로가 먼저오고 그것보다 큰 범위의 경로가 뒤에 오도록 해야함.
+```
+
+![image](https://user-images.githubusercontent.com/40031858/103433385-83033280-4c33-11eb-97a6-388751e20a61.png)
