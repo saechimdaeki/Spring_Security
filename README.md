@@ -1,6 +1,10 @@
 # Spring_Security
  Repository for studying Spring_Security
 
+---
+
+# 1 스프링 시큐리티 기본 API 
+
 ## 1-1). 인증 api - 사용자 정의 보안 기능 구현
 
 ![image](https://user-images.githubusercontent.com/40031858/102893725-6afa1900-44a5-11eb-8af2-f552d32a1c96.png)
@@ -227,3 +231,29 @@ protected void configure(HttpSecurity http) throws Exception{
 ```
 
 ![image](https://user-images.githubusercontent.com/40031858/103433385-83033280-4c33-11eb-97a6-388751e20a61.png)
+
+
+## 1-12) 예외 처리 및 요청 캐시 필터
+
+### 인증/인가 API- ExceptionTranslationFilter
+- AuthenticationException
+    - 인증 예외 처리
+    1. AuthenticationEntryPoint 호출
+        - 로그인 페이지 이동, 401 오류 코드 전달 등
+    2. 인증 예외가 발생하기 전 요청정보 저장
+        - RequestCache- 사용자의 이전 요청 정보를 세션에 저장하고 이를 꺼내오는 캐시 메커니즘
+        - SavedRequest- 사용자가 요청했던 reqeust파라미터 값들. 그 당시 헤더값들 등이 저장
+- AccessDeniedException
+    - 인가 예외 처리
+        - AccessDeniedHandler 에서 예외 처리하도록 제공
+
+![image](https://user-images.githubusercontent.com/40031858/103450178-e05fb800-4cf5-11eb-8dac-82d477670ee5.png)
+
+### http.exceptionHandling(): 예외처리 기능이 작동
+```
+protected void configure(HttpSecurity http) throws Exception{
+    http.exceptionHandling()
+        .authenticationEntryPoint(authenticationEntryPoint()) // 인증 실패 시 처리
+        .accessDeniedHandler(accessDeniedHandler())// 인증 실패 시 처리
+}
+```
