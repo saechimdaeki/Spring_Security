@@ -24,40 +24,15 @@ import java.io.IOException;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("USER");
-        auth.inMemoryAuthentication().withUser("sys").password("{noop}1234").roles("SYS");
-        auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN","SYS","USER");
-
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/user").hasRole("USER")
-                .antMatchers("/admin/pay").hasRole("ADMIN")
-                .antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SYS')")
-                .anyRequest().authenticated();
+                        .anyRequest().permitAll();
         http
-                .formLogin()
-                .successHandler((request, response, authentication) -> {
-                    RequestCache requestCache=new HttpSessionRequestCache();
-                    SavedRequest savedRequest=requestCache.getRequest(request,response);
-                    String redirectUrl = savedRequest.getRedirectUrl();
-                    response.sendRedirect(redirectUrl); //인증 성공시 바로 세션에 저장되어있던 url로 이동
-                    //System.out.println(redirectUrl);
-                });
-        http
-                .exceptionHandling()
-//                .authenticationEntryPoint((request, response, authException) -> {
-//                    response.sendRedirect("/login");
-//                })
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    response.sendRedirect("/denied");
-                });
-
+                .formLogin();
+        //http.csrf().disable(); //csrf 필터 생성 x
+        http.csrf();
     }
 }
