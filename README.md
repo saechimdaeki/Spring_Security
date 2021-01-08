@@ -273,3 +273,25 @@ protected void configure(HttpSecurity http) throws Exception{
 - Spring Security
     - http.csrf(): 기본 활성화되어 있음
     - http.csrf().disabled(): 비활성화
+
+------
+
+# 2.스프링 시큐리티 주요 아키텍쳐 이해
+## 2-1) 위임 필터 및 필터 빈 초기화 
+
+### DelegatingFilterProxy
+
+![image](https://user-images.githubusercontent.com/40031858/103987609-1d351e80-51d0-11eb-8450-ef2a5a2d094c.png)
+
+### FilterChainProxy
+1. springSecurityFilterChain의 이름으로 생성되는 필터 빈
+2. DelegatingFilterProxy 으로 부터 요청을 위임 받고 실제 보안 처리
+3. 스프링 시큐리티 초기화 시 생성되는 필터들을 관리하고 제어
+    - 스프링 시큐리티가 기본적으로 생성하는 필터
+    - 설정 클래스에서 API 추가 시 생성되는 필터
+4. 사용자의 요청을 필터 순서대로 호출하여 전달
+5. 사용자정의 필터를 생성해서 기존의 필터 전.후로 추가 가능
+    - 필터의 순서를 잘 정의
+6. 마지막 필터까지 인증 및 인가 예외가 발생하지 않으면 보안 통과
+
+![image](https://user-images.githubusercontent.com/40031858/103987993-b3694480-51d0-11eb-9693-b7b6a971005e.png)
