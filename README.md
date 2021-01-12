@@ -295,3 +295,16 @@ protected void configure(HttpSecurity http) throws Exception{
 6. 마지막 필터까지 인증 및 인가 예외가 발생하지 않으면 보안 통과
 
 ![image](https://user-images.githubusercontent.com/40031858/103987993-b3694480-51d0-11eb-9693-b7b6a971005e.png)
+
+---
+
+## 2-2 ) 필터 초기화와 다중 보안 설정
+### 필터 초기화와 다중 설정 클래스 
+
+![image](https://user-images.githubusercontent.com/40031858/104301570-26ddbf80-550b-11eb-9951-aec2e018b09c.png)
+
+![image](https://user-images.githubusercontent.com/40031858/104301610-34934500-550b-11eb-90c7-17421c5ac454.png)
+
+### WebSecurity, HttpSecurity, WebSecurityConfigurerAdapter
+
+![image](https://user-images.githubusercontent.com/40031858/104301660-3f4dda00-550b-11eb-8480-a63b130bdaf7.png)
