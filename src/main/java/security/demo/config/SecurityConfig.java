@@ -23,29 +23,13 @@ import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
-@Order(0)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-              .antMatcher("/admin/**")
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
-}
-
-@Configuration
-@Order(1)
-class SecurityConfig2 extends WebSecurityConfigurerAdapter{
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin();
+                .anyRequest().authenticated();
+        http.formLogin();
     }
 }
