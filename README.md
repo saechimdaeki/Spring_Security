@@ -308,3 +308,23 @@ protected void configure(HttpSecurity http) throws Exception{
 ### WebSecurity, HttpSecurity, WebSecurityConfigurerAdapter
 
 ![image](https://user-images.githubusercontent.com/40031858/104301660-3f4dda00-550b-11eb-8480-a63b130bdaf7.png)
+
+
+---
+
+## 2-3 Authentication
+
+### Authentication
+- 당신이 누구인지 증명하는 것
+    - 사용자의 인증정보를 저장하는 토큰 개념
+    - 인증 시 id와 password를 담고 인증 검증을 위해 전달되어 사용된다
+    - 인증 후 최종 결과(user객체, 권한정보를)담고 SecurityContext에 저장되어 전역적으로 참조 가능
+    - Authentication authentication =SecurityContextHolder.get(Context().getAuthentication())
+- 구조
+    1. principal: 사용자 아이디 혹은 User객체를 저장
+    2. credentials: 사용자 비밀번호
+    3. authorities: 인증된 사용자의 권한목록
+    4. details: 인증 부가정보
+    5. Authenticated: 인증 여부
+
+![image](https://user-images.githubusercontent.com/40031858/105342126-4d92a900-5c23-11eb-879d-a6f4cc326f17.png)
