@@ -328,3 +328,23 @@ protected void configure(HttpSecurity http) throws Exception{
     5. Authenticated: 인증 여부
 
 ![image](https://user-images.githubusercontent.com/40031858/105342126-4d92a900-5c23-11eb-879d-a6f4cc326f17.png)
+
+---
+
+## 2-4 SecurityContextHolder,SecurityContext
+
+### SecurityContext
+- Authentication 객체가 저장되는 보관소로 필요 시 언제든지 Authentication 객체를 꺼내어 쓸 수 있도록 제공되는 클래스
+- ThreadLocal에 저장되어 아무 곳에서나 참조가 가능하도록 설계함
+- 인증이 완료되면 HttpSession에 저장되어 어플리케이션 전반에 걸쳐 전역적인 참조가 가능하다
+### SecurityContextHolder
+- SecurityContext 객체 저장 방식
+    - MODE_THREADLOCAL: 스레드당 SecurityContext 객체를 할당, 기본값
+    - MODE_INHERITABLETHREADLOCAL : 메인 스레드와 자식 스레드에 관하여 동일한 SecurityContext 를 유지
+    - MODE_GLOBAL :  응용 프로그램에서 단 하나의 SecurityContext를 저장한다
+- SecurityContextHolder.clearContext():SecurityContext 기존정보 초기화
+
+- Authentication authentication= SecurityContextHolder.getContext().getAuthentication()
+
+![image](https://user-images.githubusercontent.com/40031858/105619141-20b4e080-5e33-11eb-842b-aa39c7e9ce3e.png)
+
