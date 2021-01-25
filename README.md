@@ -348,3 +348,28 @@ protected void configure(HttpSecurity http) throws Exception{
 
 ![image](https://user-images.githubusercontent.com/40031858/105619141-20b4e080-5e33-11eb-842b-aa39c7e9ce3e.png)
 
+---
+
+## 2-5 - SecurityContextPersistenceFilter
+
+### 익명 사용자
+- 새로운 SecurityContext 객체를 생성하여 SecurityContextHolder에 저장
+- AnonymousAuthenticationFilter 에서 AnonymousAuthenticationToken 객체를 SecurityContext에 저장
+
+### 인증 시
+- 새로운 SecurityContext 객체를 생성하여 SecurityContextHolder에 저장
+- UsernamePasswordAuthenticationFilter에서 인증 성공후 SecurityContext에 UsernamePasswordAuthentication 객체를 SecurityConext에 저장
+- 인증이 최종 완료되면 Session에SecurityContext를 저장
+
+### 인증 후
+- Session에서 SecurityContext 꺼내어 SecurityContextHolder에서 저장
+- SecurityContext안에 Authentication 객체가 존재하면 계속 인증을 유지한다
+
+### 최종 응답 시 공통
+- SecurityContextHolder.cleanContext()
+
+![image](https://user-images.githubusercontent.com/40031858/105697047-64990a00-5f47-11eb-8497-c13d9b2b2ac0.png)
+
+![image](https://user-images.githubusercontent.com/40031858/105697064-6ebb0880-5f47-11eb-8360-86e0dff8228d.png)
+
+![image](https://user-images.githubusercontent.com/40031858/105697103-79759d80-5f47-11eb-9e82-8360d2bad48e.png)
