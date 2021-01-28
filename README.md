@@ -379,3 +379,9 @@ protected void configure(HttpSecurity http) throws Exception{
 ## 2-6 Authentication Flow
 
 ![image](https://user-images.githubusercontent.com/40031858/106146896-94037d00-61ba-11eb-9557-d6fc9151810d.png)
+
+---
+
+## 2-7 AuthenticationManager
+
+![image](https://user-images.githubusercontent.com/40031858/106149729-f01bd080-61bd-11eb-81ed-a59ae8844cf1.png)
