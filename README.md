@@ -391,3 +391,22 @@ protected void configure(HttpSecurity http) throws Exception{
 ## 2-8 인증처리자 AuthenticationProvider
 
 ![image](https://user-images.githubusercontent.com/40031858/106345949-dc27ba00-62f6-11eb-902a-e0a10d18d6b3.png)
+
+---
+
+## 2-9 Authorization, FilterSecurityInterceptor 
+
+![image](https://user-images.githubusercontent.com/40031858/106346448-90770f80-62fa-11eb-9cff-be21ff0c0947.png)
+
+![image](https://user-images.githubusercontent.com/40031858/106346456-aedd0b00-62fa-11eb-8dee-f4909fb5fcab.png)
+
+### FilterSecurityInterceptor
+- 마지막에 위치한 필터로써 인증된 사용자에 대하여 특정 요청의 승인/거부 여부를 최종적으로 결정
+- 인증객체 없이 보호차원에 접근을 시도할 경우 AuthenticationException을 발생
+- 인증 후 자원에 접근 가능한 권한이 존재하지 않을 경우 AccessDeniedException을 발생
+- 권한 제어 방식 중 HTTP 자원의 보안을 처리하는 필터
+- 권한 처리를 AccessDecisionManager에게 맡김
+
+![image](https://user-images.githubusercontent.com/40031858/106346505-0aa79400-62fb-11eb-8da7-421e74880c2e.png)
+
+![image](https://user-images.githubusercontent.com/40031858/106346513-16935600-62fb-11eb-9708-15fc7b371f99.png)
