@@ -385,3 +385,9 @@ protected void configure(HttpSecurity http) throws Exception{
 ## 2-7 AuthenticationManager
 
 ![image](https://user-images.githubusercontent.com/40031858/106149729-f01bd080-61bd-11eb-81ed-a59ae8844cf1.png)
+
+---
+
+## 2-8 인증처리자 AuthenticationProvider
+
+![image](https://user-images.githubusercontent.com/40031858/106345949-dc27ba00-62f6-11eb-902a-e0a10d18d6b3.png)
