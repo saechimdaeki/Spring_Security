@@ -435,3 +435,12 @@ protected void configure(HttpSecurity http) throws Exception{
         - Voter가 해당 타입의 요청에 대해 결정을 내릴 수 없는 경우
 
 ![image](https://user-images.githubusercontent.com/40031858/106372876-967ef600-63b7-11eb-9afc-39c31789488b.png)
+
+
+![image](https://user-images.githubusercontent.com/40031858/106373179-4b1a1700-63ba-11eb-8014-66503ff43807.png)
+
+---
+
+## 2-11 스프링 시큐리티 필터 및 아키텍처 정리
+
+![image](https://user-images.githubusercontent.com/40031858/106373190-608f4100-63ba-11eb-92cb-ac6a646c0c40.png)
