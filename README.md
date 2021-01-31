@@ -410,3 +410,28 @@ protected void configure(HttpSecurity http) throws Exception{
 ![image](https://user-images.githubusercontent.com/40031858/106346505-0aa79400-62fb-11eb-8da7-421e74880c2e.png)
 
 ![image](https://user-images.githubusercontent.com/40031858/106346513-16935600-62fb-11eb-9708-15fc7b371f99.png)
+
+---
+
+## 2-10 AccessDecisionManager, AccessDecisionVoter
+
+### AccessDecisionManager
+- 인증 정보, 요청정보, 권한정보를 이용해 사용자의 자원접근을 허용할것인지 거부할것인지 최종결정하는 주체
+- 여러개의 Voter들을 가질 수 있으며 Voter들로부터 접근허용,거부,보류에 해당하는 각각의값을 리턴받고 판단 및 결정
+- 최종 접근 거부 시 예외 발생
+
+![image](https://user-images.githubusercontent.com/40031858/106372853-4bfd7980-63b7-11eb-82e3-491c527c1288.png)
+
+### AccessDecisionVoter
+- 판단을 심사하는것(위원)
+- Voter가 권한 부여 과정에서 판단하는 자료
+    - Autehntication-인증 정보(user)
+    - FilterInvocation - 요청 정보(antMatcher("/user"))
+    - ConfigAttributes - 권한 정보(hasRole("USER"))
+- 결정 방식
+    - ACCESS_GRANTED: 접근허용(1)
+    - ACCESS_DENIED: 접근 거부(0)
+    - ACCESS_ABSTRAIN:접근 보류(-1)
+        - Voter가 해당 타입의 요청에 대해 결정을 내릴 수 없는 경우
+
+![image](https://user-images.githubusercontent.com/40031858/106372876-967ef600-63b7-11eb-9afc-39c31789488b.png)
