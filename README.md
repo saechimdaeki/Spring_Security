@@ -444,3 +444,24 @@ protected void configure(HttpSecurity http) throws Exception{
 ## 2-11 스프링 시큐리티 필터 및 아키텍처 정리
 
 ![image](https://user-images.githubusercontent.com/40031858/106373190-608f4100-63ba-11eb-92cb-ac6a646c0c40.png)
+
+
+----
+
+----
+
+----
+
+## Form 인증 - PasswordEncoder
+- 비밀번호를 안전하게 암호화 하도록 제공
+- Spring Security5.0 이전에는 기본 PasswordEncoder가 평문을 지원하는 NoOpPasswordEncoder(현재는 Deprecated)
+- 생성
+    - PasswordEncoder passwordEncoder=PasswordEncoderFactories.createDelegatingPasswordEncoder()
+    - 여러개의 PasswordEncoder 유형을 선언한 뒤, 상황에 맞게 선택해서 사용할 수 있도록 지원하는 Encoder이다.
+- 암호화 포맷: {id}encodedPassword
+    - 기본 포맷은 Bcrpt
+    - 알고리즘 종류 :bcrpty,noop,pbkdf2,scrypt,sha256t
+    - encode(passowrd)
+        - 패스워드 암호화
+    - matches(rawPassword,encodedPassword)
+        - 패스워드 비교
